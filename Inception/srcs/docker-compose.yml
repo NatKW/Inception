@@ -1,4 +1,4 @@
-version: "3.12"
+version: "3"
 
 services:
         nginx:
@@ -9,16 +9,17 @@ services:
                        - "443:443"
                 networks:
                        - nade_network
-                depends on:
-                       - wordpress
+                depends_on:
+                         - wordpress
                 volumes:
                        - website:/var/www/html         
+        
         mariadb:
                 container_name: mariadb
                 build: 
-                       ./srcs/requirements/mariadb/
+                       requirements/mariadb/
                 volumes:
-                        -mariadb: /var/www/html
+                        - database:/var/www/html
                 expose:
                         - "3306"
                 networks:
@@ -27,37 +28,34 @@ services:
                 environment:
                         MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
                         MARIADB_DATABASE: ${MARIADB_DATABASE}
-                        MARIADB_MYSQL_LOCALHOST_USER: ${MARIADB_MYSQL_LOCALHOST_USER}
-                        MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+                        MARIADB_USER: ${MARIADB_USER}
+                        MARIADB_PASSWORD: ${MARIADB_PASSWORD}
 
-        wordpress:
+            wordpress:
                 depends_on:
                         - mariadb
                 build:
-                        ./srcs/requirements/wordpress/
-                container_name: 
-
+                        requirements/wordpress/
+                container_name: wordpress
                 volumes:
-                        -wordpress: /var/www/html
+                       - wordpress:/var/www/html
                 expose:
                         - "9000"
                 networks:
                         - nade_network
-                restart: always
-                depends on:
-                        - mariadb
                 environment:
                       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
                       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
                       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
                       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
-
+    
 volumes:
   website:
     driver_opts:
       type: none
       device: /home/nade-la-/data/website
       o: bind
+
   database:
     driver_opts:
       type: none

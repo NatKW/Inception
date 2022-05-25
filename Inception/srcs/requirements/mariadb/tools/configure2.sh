@@ -22,19 +22,10 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 USE mysql;
 FLUSH PRIVILEGES;
 
-# https://geekdudes.wordpress.com/2020/07/16/linux-bash-script-for-creating-and-configuring-maria-database/
-# Kill the anonymous users
-# Make sure that NOBODY can access the server without a password
-# Kill off the demo database
-DELETE FROM	mysql.user WHERE User='';
-DROP DATABASE test;
-DELETE FROM mysql.db WHERE Db='test';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-
 ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
 
 CREATE DATABASE IF NOT EXISTS $MARIADB_DATABASE;
-CREATE USER IF NOT EXISTS $MARIADB_USER@'localhost' IDENTIFIED BY $MARIADB_PASSWORD;
+CREATE USER $MARIADB_USER@'localhost' IDENTIFIED BY $MARIADB_PASSWORD;
 GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO $MARIADB_USER@'localhost';
 FLUSH PRIVILEGES;
 EOF

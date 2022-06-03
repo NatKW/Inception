@@ -10,7 +10,7 @@ services:
                 networks:
                        - nade_network
                 depends_on:
-                         - wordpress
+                       - wordpress
                 volumes:
                        - website:/var/www/html         
         
@@ -19,7 +19,7 @@ services:
                 build: 
                        requirements/mariadb/
                 volumes:
-                        - database:/var/www/html
+                        - database:/var/lib/mysql
                 expose:
                         - "3306"
                 networks:
@@ -30,25 +30,25 @@ services:
                         MARIADB_DATABASE: ${MARIADB_DATABASE}
                         MARIADB_USER: ${MARIADB_USER}
                         MARIADB_PASSWORD: ${MARIADB_PASSWORD}
-
-            wordpress:
+        
+        wordpress:
                 depends_on:
                         - mariadb
                 build:
                         requirements/wordpress/
                 container_name: wordpress
                 volumes:
-                       - wordpress:/var/www/html
+                        - website:/var/www/html
                 expose:
                         - "9000"
                 networks:
                         - nade_network
                 environment:
-                      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
-                      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-                      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-                      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
-    
+                        WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+                        WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+                        WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME} 
+                        WORDPRESS_DB_TITLE: ${WORDPRESS_DB_TITLE}
+
 volumes:
   website:
     driver_opts:

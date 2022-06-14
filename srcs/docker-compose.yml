@@ -34,6 +34,7 @@ services:
         wordpress:
                 depends_on:
                         - mariadb
+                image: wordpress
                 build:
                         requirements/wordpress/
                 container_name: wordpress
@@ -44,6 +45,7 @@ services:
                 networks:
                         - nade_network
                 environment:
+                        WORDPRESS_DB_HOST: mariadb
                         WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
                         WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
                         WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME} 

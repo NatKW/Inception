@@ -1,19 +1,6 @@
 version: "3"
 
 services:
-        nginx:
-                build: requirements/nginx/
-                container_name: nginx
-                restart: always
-                ports:
-                       - "443:443"
-                networks:
-                       - nade_network
-                depends_on:
-                       - wordpress
-                volumes:
-                       - website:/var/www/html         
-        
         mariadb:
                 container_name: mariadb
                 build: 
@@ -50,6 +37,23 @@ services:
                         WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
                         WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME} 
                         WORDPRESS_DB_TITLE: ${WORDPRESS_DB_TITLE}
+                        WORDPRESS_DB_ADMIN_EMAIL: ${WORDPRESS_DB_ADMIN_EMAIL}
+                        WORDPRESS_DB_ADMIN_PWD: ${WORDPRESS_DB_ADMIN_PWD}
+                        WORDPRESS_DB_ADMIN: ${WORDPRESS_DB_ADMIN}
+                        DOMAIN_NAME: ${DOMAIN_NAME}
+        nginx:
+                build: requirements/nginx/
+                container_name: nginx
+                restart: always
+                ports:
+                       - "443:443"
+                networks:
+                       - nade_network
+                depends_on:
+                       - wordpress
+                volumes:
+                       - website:/var/www/html         
+        
 
 volumes:
   website:

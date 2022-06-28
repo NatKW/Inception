@@ -23,19 +23,7 @@ RUN 	chmod +x wp-cli.phar
 RUN	mv wp-cli.phar /usr/bin/wp
 RUN	chown -R nginx:nginx /usr/bin/wp
 
-
-# Install Worpress via Worpress-cli
-#RUN	wp core download --path=/var/www/html/
-
-# Move config Files
-#COPY	tools/wp-config.php /var/www/html/wp-config.php
-#COPY 	tools/index.html /var/www/html/
-#COPY	/tools/start.sh .
-#EXPOSE	9000
-
-#ENTRYPOINT [ "sh", "start.sh" ]
-
-WORKDIR /var/www/html/wordpress
-
+WORKDIR /var/www/html/
 COPY tools/configure.sh /tmp/configure.sh
+
 ENTRYPOINT [ "sh", "/tmp/configure.sh" ]

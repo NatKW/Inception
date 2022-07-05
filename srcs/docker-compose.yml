@@ -33,14 +33,17 @@ services:
                         - nade_network
                 environment:
                         WORDPRESS_DB_HOST: mariadb
-                        WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-                        WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-                        WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME} 
+                        MARIADB_DATABASE: ${MARIADB_DATABASE}
+                        MARIADB_USER: ${MARIADB_USER}
+                        MARIADB_PASSWORD: ${MARIADB_PASSWORD}
                         WORDPRESS_DB_TITLE: ${WORDPRESS_DB_TITLE}
                         WORDPRESS_DB_ADMIN_EMAIL: ${WORDPRESS_DB_ADMIN_EMAIL}
                         WORDPRESS_DB_ADMIN_PWD: ${WORDPRESS_DB_ADMIN_PWD}
                         WORDPRESS_DB_ADMIN: ${WORDPRESS_DB_ADMIN}
                         DOMAIN_NAME: ${DOMAIN_NAME}
+                        W_USER: ${W_USER}
+                        W_PWD: ${W_PWD}
+                        W_EMAIL: ${W_EMAIL}
         nginx:
                 build: requirements/nginx/
                 container_name: nginx

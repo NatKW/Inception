@@ -22,10 +22,6 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 USE mysql;
 FLUSH PRIVILEGES;
 
-# https://geekdudes.wordpress.com/2020/07/16/linux-bash-script-for-creating-and-configuring-maria-database/
-# Kill the anonymous users
-# Make sure that NOBODY can access the server without a password
-# Kill off the demo database
 DELETE FROM	mysql.user WHERE User='';
 DROP DATABASE test;
 DELETE FROM mysql.db WHERE Db='test';

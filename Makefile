@@ -9,20 +9,20 @@ $(NAME):
 	mkdir -p /home/nade-la-/data/database
 	#lancer docker-compose
 	docker-compose -f $(SRC) up -d --build
-set_up:
 	sudo chmod 777 /var/run/docker.sock
+
+ip:
 	sudo sed -i "s|127.0.0.1	localhost|127.0.0.1	localhost nade-la-.42.fr|g" /etc/hosts
-
-
-set_down: 
-	sudo sed -i "s|127.0.0.1	localhost nade-la-.42.fr|127.0.0.1	localhost|g" /etc/hosts
 	
 stop: #stopper les containers
 	docker-compose -f $(SRC) stop 
+	sudo sed -i "s|127.0.0.1	localhost nade-la-.42.fr|127.0.0.1	localhost|g" /etc/hosts
 
 clean:	stop
 	#stop et supprime les containers
 	docker-compose -f $(SRC) down --rmi all --volumes
+	
+datarm:
 	sudo rm -rf /home/nade-la-/data
 
 prune:  clean

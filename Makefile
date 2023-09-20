@@ -19,14 +19,14 @@ stop: #stopper les containers
 	sudo sed -i "s|127.0.0.1	localhost nade-la-.42.fr|127.0.0.1	localhost|g" /etc/hosts
 
 clean:	stop
-	#stop et supprime les containers
+	#stop et supprime les containers/images/volumes
 	docker-compose -f $(SRC) down --rmi all --volumes
 	
 datarm:
 	sudo rm -rf /home/nade-la-/data
 
 prune:  clean
-	#effacer tous les containers inutilises
+	#effacer tous les containers/images/réseaux/volumes inutilises
 	docker system prune -a -f
 		
 re: 	prune all

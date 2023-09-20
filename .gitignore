@@ -1,0 +1,8 @@
+# ignorer la Doc SQL
+.gif
+
+# ignorer le fichier .env
+.env
+
+# ignorer les fichiers .DS_Store aux ≠ endroits du projets
+**/.DS_Store

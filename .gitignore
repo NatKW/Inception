@@ -1,8 +1,11 @@
 # ignorer la Doc SQL
-.gif
+1694335575437.gif
 
 # ignorer le fichier .env
 .env
 
 # ignorer les fichiers .DS_Store aux ≠ endroits du projets
 **/.DS_Store
+
+# Ignorer le gitignore
+.gitignore

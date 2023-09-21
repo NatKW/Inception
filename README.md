@@ -8,4 +8,4 @@ Using **MariaDb, Nginx, Wordpress.**
 - Check if all 3 containers started by using "docker ps"
 *Requirements* : Docker, Docker-compose
 
-For more on this project, check ELKHAMINA.md, done by my friend Amina El Kattabi
+For more on this project, check [ELKAMINA_Memo](ELKHAMINA_Memo.md), done by my friend [Amina El Kattabi](https://github.com/ELKAMINA)

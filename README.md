@@ -7,3 +7,5 @@ Using **MariaDb, Nginx, Wordpress.**
 - In a terminal, type in "make"
 - Check if all 3 containers started by using "docker ps"
 *Requirements* : Docker, Docker-compose
+
+For more on this project, check ELKHAMINA.md, done by my friend Amina El Kattabi

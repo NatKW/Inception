@@ -6,6 +6,3 @@
 
 # ignorer les fichiers .DS_Store aux ≠ endroits du projets
 **/.DS_Store
-
-# Ignorer le gitignore
-.gitignore
